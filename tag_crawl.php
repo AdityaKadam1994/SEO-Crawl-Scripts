@@ -1,6 +1,18 @@
 <?php 
+	$link_arr = array();
+	$tags_arr = array();
+	$link = $_REQUEST['links'];
+	$str_arr = preg_split ("/\,/", $link);
+	foreach($str_arr as $ele) {
+		array_push($link_arr,$ele);
+	}
 	
-function crawlPage($url,$arrr) { 
+	$tags = $_REQUEST['checked_tag'];
+	foreach ($tags as $checked_tag){ 
+		array_push($tags_arr,$checked_tag);
+	}	
+	function crawlPage($url,$arrr) { 
+		
 
 	$dom = new DOMDocument; 
 	
@@ -12,7 +24,7 @@ function crawlPage($url,$arrr) {
 		@$dom->loadHTMLFile($linkname); 
 		foreach($arrr as $tagname ){
 			$node = $dom -> getElementsByTagName($tagname); 
-			echo '<b>'.$tagname.'</b>';
+			echo '<th><b>'.$tagname.'</b></th>';
 			echo '<br>';
 			
 			// Extracting attribute from each object 
@@ -33,8 +45,14 @@ function crawlPage($url,$arrr) {
 			}
 			elseif($tagname == 'a') {
 				foreach ($node as $element) { 
-					echo $element -> getAttribute('href'); 
+					$href= $element -> getAttribute('href'); 
+
+					$content = $element -> nodeValue;
+					$final = htmlspecialchars("<a href=".'"'.$href.'"'.">".$content."</a>",ENT_QUOTES);
+					echo $final;
+					
 					echo '<br>';
+					
 				}
 			}
 			elseif($tagname == 'img') {
@@ -42,8 +60,10 @@ function crawlPage($url,$arrr) {
 				foreach ($node as $element) { 
 					$src = $element -> getAttribute('src'); 
 					$alt = $element -> getAttribute('alt'); 
-					
-					echo 'src='.$src.' alt='.$alt.'<br>';
+					$final = htmlspecialchars("<img src=".'"'.$src.'"'." "."alt=".'"'.$alt.'"'.">",ENT_QUOTES);
+					// echo 'src='.$src.' alt='.$alt.'<br>';
+					echo $final;
+					echo '<br>';
 				}
 			}
 			elseif($tagname == 'link') {
@@ -71,11 +91,9 @@ function crawlPage($url,$arrr) {
 		echo '>>>>>>>>>>>>>>>>>>>>END>>>>>>>>>>>>>>>>>>>>>>>>>>><br>';
 	}
 	
+	
 }
-
-crawlPage(["https://www.itimf.com/locate_advisor/east.aspx",
-"https://www.itimf.com/locate_advisor/west.aspx",
-"https://www.itimf.com/for-investors/faqs/ISIP"],['h1','h2','h3','h4','h5','h6','a','img','meta','link']); 
+crawlPage($link_arr,$tags_arr); 
 
 
 ?> 
