@@ -21,6 +21,7 @@
 			vertical-align: top;
 			border-right: 1px solid #fff;
 			min-width: 100px;
+			padding: 0 5px;
 		}
 		td br {
 			margin: 8px 0;
