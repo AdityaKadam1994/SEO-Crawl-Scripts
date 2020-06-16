@@ -1,4 +1,38 @@
-<?php 
+<?php
+	echo "<style>
+	
+		body {
+			background: #7f7fd5;
+			// background: -webkit-linear-gradient(to right, #7f7fd5, #86a8e7, #91eae4);
+			// background: linear-gradient(to right, #7f7fd5, #86a8e7, #91eae4);
+			color: #fff;
+			font-size: 16px;
+		}
+		b {
+			display: inline-block;
+			font-size : 20px;
+			margin: 8px 0;
+			border-bottom: 1px dotted #fff;
+		}
+		b.main-head {
+			color: #38ef7d;
+		}
+		.flex-container {
+			display: flex;
+			
+		}
+		.flex-childs {
+			border-right: 1px solid white;
+			width: 800px;
+    		align-items: center;
+    		justify-content: center;
+		}
+		td {
+			vertical-align: top;
+			border-right: 1px solid #fff;
+		}
+
+	</style>";
 	$link_arr = array();
 	$tags_arr = array();
 	$link = $_REQUEST['links'];
@@ -18,13 +52,15 @@
 	
 	// Loading HTML content in $dom 
 	foreach ($url as $linkname) {
-		echo $linkname;
+		echo "<b class='main-head'> Crawling for: ".$linkname."</b>";
 		echo '<br>';
-
+		echo "<table class=''>";
 		@$dom->loadHTMLFile($linkname); 
 		foreach($arrr as $tagname ){
+			echo "<td class=''>";
 			$node = $dom -> getElementsByTagName($tagname); 
-			echo '<th><b>'.$tagname.'</b></th>';
+			
+			echo '<b>'.$tagname.'</b>';
 			echo '<br>';
 			
 			// Extracting attribute from each object 
@@ -32,11 +68,11 @@
 	
 				foreach ($node as $element) { 
 					if ($element -> getAttribute('name')){
-						echo "<b>".$element -> getAttribute('name')."</b>".":".$element -> getAttribute('content'); 
+						echo "<strong>".$element -> getAttribute('name')."</strong>".":".$element -> getAttribute('content'); 
 						echo "<br>";
 					}else {
 
-						echo "<b>".$element -> getAttribute('property')."</b>".":".$element -> getAttribute('content'); 
+						echo "<strong>".$element -> getAttribute('property')."</strong>".":".$element -> getAttribute('content'); 
 						echo '<br>';
 					}
 					
@@ -70,7 +106,7 @@
 				foreach ($node as $element) { 
 					$atr = $element -> getAttribute('rel'); 
 					if ($atr == 'canonical') {
-						echo '<b>Canonical:</b> '.$element -> getAttribute('href').'<br>'; 
+						echo '<strong>Canonical:</strong> '.$element -> getAttribute('href').'<br>'; 
 						}
 				}
 			}
@@ -85,7 +121,9 @@
 				echo '<br>';
 			}
 			 
+			echo "</td>";
 		}
+		echo "</table>";
 
 		echo '<br>';
 		echo '>>>>>>>>>>>>>>>>>>>>END>>>>>>>>>>>>>>>>>>>>>>>>>>><br>';
