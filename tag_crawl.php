@@ -17,19 +17,17 @@
 		b.main-head {
 			color: #38ef7d;
 		}
-		.flex-container {
-			display: flex;
-			
-		}
-		.flex-childs {
-			border-right: 1px solid white;
-			width: 800px;
-    		align-items: center;
-    		justify-content: center;
-		}
 		td {
 			vertical-align: top;
 			border-right: 1px solid #fff;
+			min-width: 100px;
+		}
+		td br {
+			margin: 8px 0;
+			display: inline-block;
+		}
+		table {
+			border: 3px solid #fff;
 		}
 
 	</style>";
@@ -124,9 +122,9 @@
 			echo "</td>";
 		}
 		echo "</table>";
+		
 
 		echo '<br>';
-		echo '>>>>>>>>>>>>>>>>>>>>END>>>>>>>>>>>>>>>>>>>>>>>>>>><br>';
 	}
 	
 	
