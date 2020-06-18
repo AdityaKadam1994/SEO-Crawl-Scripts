@@ -34,15 +34,22 @@
 	</style>";
 	$link_arr = array();
 	$tags_arr = array();
-	$link = $_POST['links'];
-	$str_arr = explode(",",$link);
+	$link = $_REQUEST['links'];
+	$str_arr = explode(",", $link);
+	// print_r($str_arr);
 	foreach($str_arr as $ele) {
-		array_push($link_arr,$ele);
+		$trimmed = trim($ele);
+		// echo $trimmed;
+		array_push($link_arr,$trimmed);
+		
+		
 	}
 	
 	$tags = $_REQUEST['checked_tag'];
 	foreach ($tags as $checked_tag){ 
-		array_push($tags_arr,$checked_tag);
+		$tags = trim($checked_tag);
+		array_push($tags_arr,$tags);
+		// echo $tags;
 	}	
 	function crawlPage($url,$arrr) { 
 		
@@ -131,7 +138,7 @@
 	
 	
 }
-crawlPage($str_arr,$tags_arr); 
+crawlPage($link_arr,$tags_arr);
 
 
 ?> 
