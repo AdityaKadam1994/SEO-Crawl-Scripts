@@ -34,8 +34,8 @@
 	</style>";
 	$link_arr = array();
 	$tags_arr = array();
-	$link = $_REQUEST['links'];
-	$str_arr = preg_split ("/\,/", $link);
+	$link = $_POST['links'];
+	$str_arr = explode(",",$link);
 	foreach($str_arr as $ele) {
 		array_push($link_arr,$ele);
 	}
@@ -46,7 +46,8 @@
 	}	
 	function crawlPage($url,$arrr) { 
 		
-
+		
+	
 	$dom = new DOMDocument; 
 	
 	// Loading HTML content in $dom 
@@ -130,7 +131,7 @@
 	
 	
 }
-crawlPage($link_arr,$tags_arr); 
+crawlPage($str_arr,$tags_arr); 
 
 
 ?> 
