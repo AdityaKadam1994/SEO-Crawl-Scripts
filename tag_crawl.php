@@ -120,7 +120,7 @@
 			else {
 				foreach ($node as $element) { 
 						// echo $element -> nodeValue;
-						echo $element -> nodeValue;
+						echo htmlspecialchars('<'.$tagname.'>'.$element -> nodeValue.'</'.$tagname.'>');
 						// echo $element -> tagName;
 						echo '<br>';
 					
