@@ -72,8 +72,9 @@
 			
 			// Extracting attribute from each object 
 			if ($tagname == 'meta') {
-	
+				$count = 0;
 				foreach ($node as $element) { 
+					$count = count($node);
 					if ($element -> getAttribute('name')){
 						echo "<strong>".$element -> getAttribute('name')."</strong>".":".$element -> getAttribute('content'); 
 						echo "<br>";
@@ -84,10 +85,13 @@
 					}
 					
 				}
+				echo "<b> Total Count: ".$count."</b>";
 
 			}
 			elseif($tagname == 'a') {
+				$count = 0;
 				foreach ($node as $element) { 
+					$count = count($node);
 					$href= $element -> getAttribute('href'); 
 
 					$content = $element -> nodeValue;
@@ -97,10 +101,13 @@
 					echo '<br>';
 					
 				}
+				echo "<b> Total Count: ".$count."</b>";
 			}
 			elseif($tagname == 'img') {
 				echo '<br>';
-				foreach ($node as $element) { 
+				$count = 0;
+				foreach ($node as $key => $element) {
+					$count = count($node);
 					$src = $element -> getAttribute('src'); 
 					$alt = $element -> getAttribute('alt');
 					$data_src = $element -> getAttribute('data-src');
@@ -109,23 +116,31 @@
 					echo $final;
 					echo '<br>';
 				}
+				echo "<b> Total Count: ".$count."</b>";
 			}
 			elseif($tagname == 'link') {
+				$count = 0;
 				foreach ($node as $element) { 
 					$atr = $element -> getAttribute('rel'); 
 					if ($atr == 'canonical') {
+						$count++;
 						echo '<strong>Canonical:</strong> '.$element -> getAttribute('href').'<br>'; 
 						}
 				}
+				echo "<b> Total Count: ".$count."</b>";
 			}
 			else {
+				$count = 0;
 				foreach ($node as $element) { 
+					
 						// echo $element -> nodeValue;
+						$count = count($node);
 						echo htmlspecialchars('<'.$tagname.'>'.$element -> nodeValue.'</'.$tagname.'>');
 						// echo $element -> tagName;
 						echo '<br>';
 					
 				}
+				echo "<b> Total Count: ".$count."</b>";
 				echo '<br>';
 			}
 			 
