@@ -102,8 +102,9 @@
 				echo '<br>';
 				foreach ($node as $element) { 
 					$src = $element -> getAttribute('src'); 
-					$alt = $element -> getAttribute('alt'); 
-					$final = htmlspecialchars("<img src=".'"'.$src.'"'." "."alt=".'"'.$alt.'"'.">",ENT_QUOTES);
+					$alt = $element -> getAttribute('alt');
+					$data_src = $element -> getAttribute('data-src');
+					$final = htmlspecialchars("<img src=".'"'.$src.'"'." "."alt=".'"'.$alt.'"'."data-src=".'"'.$data_src.'"'.">",ENT_QUOTES);
 					// echo 'src='.$src.' alt='.$alt.'<br>';
 					echo $final;
 					echo '<br>';
